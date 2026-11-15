@@ -1,16 +1,10 @@
-# Python
-__pycache__/
-*.py[cod]
 .venv/
-venv/
+__pycache__/
 .ipynb_checkpoints/
-.pytest_cache/
-
-# Editors / OS
-.vscode/
-.idea/
+*.pyc
 .DS_Store
-Thumbs.db
 
-# Local environment variables
+# Raw Uwezo file (116 MB, over GitHub limit) - download from HDX, see README
+summative/linear_regression/ug15_hhld.csv
+.vscode/
 .env

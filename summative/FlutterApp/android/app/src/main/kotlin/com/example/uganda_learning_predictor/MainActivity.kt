@@ -1,4 +1,4 @@
-package com.example.student_grade_predictor
+package com.example.uganda_learning_predictor
 
 import io.flutter.embedding.android.FlutterActivity
 

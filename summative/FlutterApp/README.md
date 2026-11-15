@@ -1,6 +1,6 @@
-# Student Grade Predictor (Flutter app)
+# Village Learning Predictor (Flutter app)
 
-One-page Flutter app that sends a student's semester 1 information to the prediction API and shows the predicted semester 2 grade and risk level.
+One-page Flutter app that sends a Ugandan village's community details to the prediction API and shows the predicted average learning score (0-10) and support priority.
 
 ```bash
 flutter pub get
