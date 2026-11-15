@@ -13,6 +13,14 @@ const Color brandLight = Color(0xFFF3F7F2);
 
 void main() => runApp(const LearningPredictorApp());
 
+/// Removes the Android "stretch" effect that distorts the page when it is pulled past the top or bottom.
+class NoStretchScrollBehavior extends MaterialScrollBehavior {
+  const NoStretchScrollBehavior();
+
+  @override
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) => child;
+}
+
 class LearningPredictorApp extends StatelessWidget {
   const LearningPredictorApp({super.key});
 
@@ -21,6 +29,7 @@ class LearningPredictorApp extends StatelessWidget {
     return MaterialApp(
       title: 'Village Learning Predictor',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: const NoStretchScrollBehavior(),
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: brandGreen,
@@ -280,6 +289,8 @@ class _PredictionPageState extends State<PredictionPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(), // stop at the edges instead of bouncing or stretching
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
