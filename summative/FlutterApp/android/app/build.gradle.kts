@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.uganda_learning_predictor"
+    namespace = "com.example.rwanda_food_price_predictor"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.uganda_learning_predictor"
+        applicationId = "com.example.rwanda_food_price_predictor"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

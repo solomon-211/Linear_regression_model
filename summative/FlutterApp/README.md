@@ -1,10 +1,17 @@
-# Village Learning Predictor (Flutter app)
+# rwanda_food_price_predictor
 
-One-page Flutter app that sends a Ugandan village's community details to the prediction API and shows the predicted average learning score (0-10) and support priority.
+A new Flutter project.
 
-```bash
-flutter pub get
-flutter run
-```
+## Getting Started
 
-The API URL is set in `lib/main.dart` (`apiUrl`). See the root [README](../../README.md) for full instructions.
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
+- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

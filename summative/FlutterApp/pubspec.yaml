@@ -1,5 +1,5 @@
-name: uganda_learning_predictor
-description: "One-page app that predicts the average learning score of children in a Ugandan village using the deployed FastAPI model."
+name: rwanda_food_price_predictor
+description: "Predicts next month's retail food price per kg in Rwandan markets and refugee camps."
 publish_to: 'none'
 version: 1.0.0+1
 

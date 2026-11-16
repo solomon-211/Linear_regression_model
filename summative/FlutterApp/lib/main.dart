@@ -6,30 +6,21 @@ import 'package:http/http.dart' as http;
 
 /// Public URL of the deployed FastAPI /predict endpoint.
 /// Change this if your Render service has a different name.
-const String apiUrl = 'https://uganda-learning-predictor.onrender.com/predict';
+const String apiUrl = 'https://rwanda-food-price-predictor.onrender.com/predict';
 
 const Color brandGreen = Color(0xFF1B5E20);
 const Color brandLight = Color(0xFFF3F7F2);
 
-void main() => runApp(const LearningPredictorApp());
+void main() => runApp(const FoodPriceApp());
 
-/// Removes the Android "stretch" effect that distorts the page when it is pulled past the top or bottom.
-class NoStretchScrollBehavior extends MaterialScrollBehavior {
-  const NoStretchScrollBehavior();
-
-  @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) => child;
-}
-
-class LearningPredictorApp extends StatelessWidget {
-  const LearningPredictorApp({super.key});
+class FoodPriceApp extends StatelessWidget {
+  const FoodPriceApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Village Learning Predictor',
+      title: 'Rwanda Food Price Predictor',
       debugShowCheckedModeBanner: false,
-      scrollBehavior: const NoStretchScrollBehavior(),
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: brandGreen,
@@ -50,18 +41,23 @@ class LearningPredictorApp extends StatelessWidget {
   }
 }
 
+enum FieldKind { text, integer, decimal }
+
 /// One input variable of the model: the JSON key the API expects, its label, hint and icon.
-/// Text fields can offer quick-fill options (they still remain text fields).
+/// Text fields can offer quick-fill chips (they still remain text fields).
 class InputField {
-  const InputField(this.key, this.label, this.hint, this.icon, {this.options = const []});
+  const InputField(this.key, this.label, this.hint, this.icon,
+      {this.kind = FieldKind.decimal, this.allowed = const [], this.chips = const []});
 
   final String key;
   final String label;
   final String hint;
   final IconData icon;
-  final List<String> options;
+  final FieldKind kind;
+  final List<String> allowed; // values the API accepts, used to fix capitalisation
+  final List<String> chips; // quick-fill shortcuts shown under the field
 
-  bool get isText => options.isNotEmpty;
+  bool get isText => kind == FieldKind.text;
 }
 
 class Section {
@@ -73,43 +69,50 @@ class Section {
   final List<InputField> fields;
 }
 
-/// The 12 variables the model needs, grouped into three sections.
+const List<String> commodities = [
+  'Bananas', 'Beans (dry)', 'Cabbage', 'Cassava', 'Cassava flour', 'Cassava leaves', 'Fish (dry)',
+  'Maize', 'Maize flour', 'Maize flour (imported)', 'Meat (beef)', 'Potatoes', 'Potatoes (Irish)',
+  'Rice (imported)', 'Rice (local)', 'Rice (long grain, high quality, local)', 'Salt', 'Sorghum', 'Sugar',
+];
+const List<String> provinces = [
+  'Eastern Province', 'Kigali City', 'Northern Province', 'Southern Province', 'Western Province',
+];
+
+/// The 8 variables the model needs, grouped into three sections.
 const List<Section> sections = [
-  Section('Location', 'Where the village is', Icons.place_outlined, [
-    InputField('region', 'Region', 'Central, Eastern, North or Western', Icons.map_outlined,
-        options: ['Central', 'Eastern', 'North', 'Western']),
-    InputField('area', 'Area', 'Rural or Urban', Icons.location_city_outlined, options: ['Rural', 'Urban']),
+  Section('Food and market', 'What is sold and where', Icons.storefront_outlined, [
+    InputField('commodity', 'Food item', 'One of 19 foods, e.g. Beans (dry)', Icons.shopping_basket_outlined,
+        kind: FieldKind.text,
+        allowed: commodities,
+        chips: ['Beans (dry)', 'Maize', 'Maize flour', 'Cassava flour', 'Rice (local)', 'Potatoes (Irish)', 'Sugar', 'Salt']),
+    InputField('province', 'Province', 'Eastern, Kigali City, Northern, Southern or Western', Icons.map_outlined,
+        kind: FieldKind.text, allowed: provinces, chips: provinces),
+    InputField('market_type', 'Market type', 'Refugee camp or Town market', Icons.holiday_village_outlined,
+        kind: FieldKind.text, allowed: ['Refugee camp', 'Town market'], chips: ['Refugee camp', 'Town market']),
+    InputField('distance_to_kigali_km', 'Distance from Kigali', 'Kilometres, 0 to 150', Icons.route_outlined),
   ]),
-  Section('Households', 'Share of households in the village (%)', Icons.home_outlined, [
-    InputField('pct_mother_secondary', 'Mothers with secondary education', '0 to 100 %', Icons.school_outlined),
-    InputField('pct_electricity', 'Households with electricity', '0 to 100 %', Icons.bolt_outlined),
-    InputField('pct_phone', 'Households with a mobile phone', '0 to 100 %', Icons.smartphone_outlined),
-    InputField('pct_toilet', 'Households with a toilet', '0 to 100 %', Icons.wc_outlined),
-    InputField('pct_three_meals', 'Households eating 3+ meals a day', '0 to 100 %', Icons.restaurant_outlined),
-    InputField('avg_household_size', 'Average household size', 'People per household, 1 to 20', Icons.groups_outlined),
+  Section('Month to predict', 'The month you want a price for', Icons.calendar_month_outlined, [
+    InputField('year', 'Year', 'Whole number, 2018 to 2030', Icons.event_outlined, kind: FieldKind.integer),
+    InputField('month', 'Month', 'Whole number, 1 (January) to 12 (December)', Icons.date_range_outlined,
+        kind: FieldKind.integer),
   ]),
-  Section('Children and schooling', 'Children aged 6 to 16 in the village', Icons.child_care_outlined, [
-    InputField('pct_private_school', 'Children in private school', '0 to 100 %', Icons.account_balance_outlined),
-    InputField('pct_paid_tuition', 'Children with paid extra tuition', '0 to 100 %', Icons.payments_outlined),
-    InputField('pct_preschool', 'Children who attended preschool', '0 to 100 %', Icons.toys_outlined),
-    InputField('avg_child_age', 'Average age of children', 'Years, 6 to 16', Icons.cake_outlined),
+  Section("Last month's prices", 'Retail price per kg in Rwandan francs (RWF)', Icons.payments_outlined, [
+    InputField('price_last_month', 'Price in this market last month', 'RWF per kg, e.g. 362.5', Icons.sell_outlined),
+    InputField('national_median_last_month', 'National median price last month', 'RWF per kg across Rwanda',
+        Icons.public_outlined),
   ]),
 ];
 
-/// Example village from the dataset, used by the "Fill example" button.
-const Map<String, String> exampleVillage = {
-  'region': 'Central',
-  'area': 'Rural',
-  'pct_mother_secondary': '27.8',
-  'pct_electricity': '22.2',
-  'pct_phone': '44.4',
-  'pct_toilet': '66.7',
-  'pct_three_meals': '33.3',
-  'avg_household_size': '4.78',
-  'pct_private_school': '0',
-  'pct_paid_tuition': '0',
-  'pct_preschool': '4.3',
-  'avg_child_age': '10.11',
+/// Example from the test set (Nyabiheke refugee camp, September 2025), used by the "Fill example" button.
+const Map<String, String> exampleMarket = {
+  'commodity': 'Cassava',
+  'province': 'Eastern Province',
+  'market_type': 'Refugee camp',
+  'distance_to_kigali_km': '44.8',
+  'year': '2025',
+  'month': '9',
+  'price_last_month': '362.5',
+  'national_median_last_month': '350',
 };
 
 class PredictionPage extends StatefulWidget {
@@ -127,8 +130,9 @@ class _PredictionPageState extends State<PredictionPage> {
 
   bool _loading = false;
   String? _error; // shown in the result area when something is wrong
-  double? _score; // predicted learning score
-  String? _priority; // High / Medium / Low
+  double? _price; // predicted price, RWF per kg
+  double? _change; // % change from last month
+  String? _alert; // Rising / Stable / Falling
   String? _advice; // message from the API
 
   List<InputField> get _allFields => sections.expand((s) => s.fields).toList();
@@ -143,9 +147,9 @@ class _PredictionPageState extends State<PredictionPage> {
 
   void _fillExample() {
     setState(() {
-      exampleVillage.forEach((key, value) => _controllers[key]!.text = value);
+      exampleMarket.forEach((key, value) => _controllers[key]!.text = value);
       _error = null;
-      _score = null;
+      _price = null;
     });
   }
 
@@ -155,12 +159,17 @@ class _PredictionPageState extends State<PredictionPage> {
         c.clear();
       }
       _error = null;
-      _score = null;
+      _price = null;
     });
   }
 
-  /// "central" -> "Central", so small typing differences are not rejected.
-  String _capitalise(String s) => s.isEmpty ? s : s[0].toUpperCase() + s.substring(1).toLowerCase();
+  /// "beans (dry)" -> "Beans (dry)", so capitalisation differences are not rejected.
+  String _matchAllowed(InputField field, String text) {
+    for (final value in field.allowed) {
+      if (value.toLowerCase() == text.toLowerCase()) return value;
+    }
+    return text; // unknown value: the API will explain what is allowed
+  }
 
   /// Checks every field is filled in and numbers are numbers.
   /// Allowed values and ranges are checked by the API (Pydantic) and shown here if they fail.
@@ -173,7 +182,16 @@ class _PredictionPageState extends State<PredictionPage> {
         return null;
       }
       if (field.isText) {
-        values[field.key] = _capitalise(text);
+        values[field.key] = _matchAllowed(field, text);
+        continue;
+      }
+      if (field.kind == FieldKind.integer) {
+        final whole = int.tryParse(text);
+        if (whole == null) {
+          _showError('"${field.label}" must be a whole number, e.g. 9 (you entered "$text").');
+          return null;
+        }
+        values[field.key] = whole;
         continue;
       }
       final value = double.tryParse(text);
@@ -189,7 +207,7 @@ class _PredictionPageState extends State<PredictionPage> {
   void _showError(String message) {
     setState(() {
       _error = message;
-      _score = null;
+      _price = null;
     });
     _scrollToResult();
   }
@@ -212,7 +230,7 @@ class _PredictionPageState extends State<PredictionPage> {
     setState(() {
       _loading = true;
       _error = null;
-      _score = null;
+      _price = null;
     });
 
     try {
@@ -227,8 +245,9 @@ class _PredictionPageState extends State<PredictionPage> {
       final body = jsonDecode(response.body);
       if (response.statusCode == 200) {
         setState(() {
-          _score = (body['predicted_learning_score'] as num).toDouble();
-          _priority = body['support_priority'] as String;
+          _price = (body['predicted_price_rwf_per_kg'] as num).toDouble();
+          _change = (body['change_vs_last_month_pct'] as num).toDouble();
+          _alert = body['price_alert'] as String;
           _advice = body['message'] as String;
         });
         _scrollToResult();
@@ -258,18 +277,19 @@ class _PredictionPageState extends State<PredictionPage> {
     if (err['ctx'] is Map) {
       final ctx = err['ctx'] as Map;
       if (ctx.containsKey('ge')) msg = 'must be at least ${ctx['ge']}';
+      if (ctx.containsKey('gt')) msg = 'must be greater than ${ctx['gt']}';
       if (ctx.containsKey('le')) msg = 'must be at most ${ctx['le']}';
       if (ctx.containsKey('expected')) msg = 'must be one of ${ctx['expected']}';
     }
     return label != null ? '"$label" $msg.' : '$msg.';
   }
 
-  Color get _priorityColor {
-    switch (_priority) {
-      case 'High':
+  Color get _alertColor {
+    switch (_alert) {
+      case 'Rising':
         return Colors.red.shade700;
-      case 'Medium':
-        return Colors.orange.shade800;
+      case 'Falling':
+        return Colors.blue.shade700;
       default:
         return Colors.green.shade700;
     }
@@ -279,7 +299,7 @@ class _PredictionPageState extends State<PredictionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Village Learning Predictor', style: TextStyle(fontWeight: FontWeight.w600)),
+        title: const Text('Rwanda Food Price Predictor', style: TextStyle(fontWeight: FontWeight.w600)),
         centerTitle: true,
         backgroundColor: brandGreen,
         foregroundColor: Colors.white,
@@ -289,8 +309,6 @@ class _PredictionPageState extends State<PredictionPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: const ClampingScrollPhysics(), // stop at the edges instead of bouncing or stretching
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -324,19 +342,19 @@ class _PredictionPageState extends State<PredictionPage> {
           CircleAvatar(
             radius: 24,
             backgroundColor: Colors.white24,
-            child: Icon(Icons.menu_book_rounded, color: Colors.white),
+            child: Icon(Icons.shopping_basket_rounded, color: Colors.white),
           ),
           SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Find where learning support is needed',
+                Text("Will families afford food next month?",
                     style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                 SizedBox(height: 6),
                 Text(
-                  "Enter a Ugandan village's community details to predict the average reading and maths "
-                  'score (0-10) of its children.',
+                  "Enter a food item, its market and last month's prices to predict next month's retail "
+                  'price per kg in a Rwandan town market or refugee camp.',
                   style: TextStyle(color: Colors.white, height: 1.35),
                 ),
               ],
@@ -397,8 +415,12 @@ class _PredictionPageState extends State<PredictionPage> {
         children: [
           TextField(
             controller: _controllers[field.key],
-            keyboardType: field.isText ? TextInputType.text : const TextInputType.numberWithOptions(decimal: true),
-            textCapitalization: field.isText ? TextCapitalization.words : TextCapitalization.none,
+            keyboardType: switch (field.kind) {
+              FieldKind.text => TextInputType.text,
+              FieldKind.integer => TextInputType.number,
+              FieldKind.decimal => const TextInputType.numberWithOptions(decimal: true),
+            },
+            textCapitalization: field.isText ? TextCapitalization.sentences : TextCapitalization.none,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               labelText: field.label,
@@ -412,7 +434,7 @@ class _PredictionPageState extends State<PredictionPage> {
               spacing: 8,
               runSpacing: 4,
               children: [
-                for (final option in field.options)
+                for (final option in field.chips)
                   ActionChip(
                     label: Text(option),
                     visualDensity: VisualDensity.compact,
@@ -485,40 +507,49 @@ class _PredictionPageState extends State<PredictionPage> {
           ],
         ),
       );
-    } else if (_score != null) {
+    } else if (_price != null) {
+      final sign = _change! > 0 ? '+' : '';
       content = Container(
         key: const ValueKey('result'),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: _priorityColor, width: 1.5),
+          border: Border.all(color: _alertColor, width: 1.5),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           children: [
-            Text('Predicted average learning score', style: TextStyle(color: Colors.grey.shade700)),
+            Text('Predicted retail price', style: TextStyle(color: Colors.grey.shade700)),
             const SizedBox(height: 6),
-            Text('${_score!.toStringAsFixed(2)} / 10',
-                style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: LinearProgressIndicator(
-                value: (_score! / 10).clamp(0.0, 1.0),
-                minHeight: 10,
-                color: _priorityColor,
-                backgroundColor: Colors.grey.shade200,
-              ),
-            ),
+            Text('${_price!.toStringAsFixed(1)} RWF / kg',
+                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text('$sign${_change!.toStringAsFixed(1)}% compared with last month',
+                style: TextStyle(color: _alertColor, fontWeight: FontWeight.w600)),
             const SizedBox(height: 14),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
-                color: _priorityColor.withAlpha(31),
+                color: _alertColor.withAlpha(31),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Text('$_priority priority for support',
-                  style: TextStyle(color: _priorityColor, fontWeight: FontWeight.bold)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    _alert == 'Rising'
+                        ? Icons.trending_up
+                        : _alert == 'Falling'
+                            ? Icons.trending_down
+                            : Icons.trending_flat,
+                    color: _alertColor,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 6),
+                  Text('Price ${_alert!.toLowerCase()}',
+                      style: TextStyle(color: _alertColor, fontWeight: FontWeight.bold)),
+                ],
+              ),
             ),
             const SizedBox(height: 10),
             Text(_advice ?? '', textAlign: TextAlign.center, style: const TextStyle(height: 1.35)),
@@ -538,7 +569,7 @@ class _PredictionPageState extends State<PredictionPage> {
           children: [
             Icon(Icons.insights_outlined, size: 32, color: Colors.grey.shade500),
             const SizedBox(height: 8),
-            Text('The predicted learning score will appear here.',
+            Text('The predicted price will appear here.',
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade600)),
           ],
         ),

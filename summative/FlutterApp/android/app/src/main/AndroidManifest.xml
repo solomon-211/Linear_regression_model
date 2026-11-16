@@ -2,7 +2,7 @@
     <!-- Needed to call the prediction API (release builds don't add it automatically) -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="Learning Predictor"
+        android:label="Food Price Predictor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,7 +1,7 @@
 [project]
-name = "uganda-learning-predictor"
+name = "rwanda-food-price-predictor"
 version = "0.1.0"
-description = "Predicts the average learning score of children in Ugandan villages (regression notebook, FastAPI service, Flutter app)."
+description = "Predicts next month's retail food price per kg in Rwandan markets and refugee camps (regression notebook, FastAPI service, Flutter app)."
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115",

@@ -3,8 +3,3 @@ __pycache__/
 .ipynb_checkpoints/
 *.pyc
 .DS_Store
-
-# Raw Uwezo file (116 MB, over GitHub limit) - download from HDX, see README
-summative/linear_regression/ug15_hhld.csv
-.vscode/
-.env
