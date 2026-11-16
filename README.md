@@ -13,7 +13,7 @@ so that WFP cash-transfer officers can check whether the planned transfer still 
 
 ## API (Swagger UI)
 
-**https://rwanda-food-price-predictor.onrender.com/docs**
+**https://liner-regression-model-project.onrender.com/docs**
 
 - `POST /predict`: accepts the 8 input variables and returns the predicted price (RWF per kg), the change from last month and a price alert (Rising, Stable or Falling).
 - `POST /retrain`: accepts a CSV file of new prices, updates the model and applies it immediately.
@@ -45,7 +45,7 @@ so that WFP cash-transfer officers can check whether the planned transfer still 
    flutter devices        # list available device IDs
    flutter run -d <device-id>
    ```
-7. Fill in all 8 fields (or tap **Fill example**) and press **Predict**. Example input: Cassava, Eastern Province, Refugee camp, 44.8 km, year 2025, month 9, last month's price 362.5, national median 350. The expected prediction is about 389.5 RWF per kg (+7.4%, Price rising).
+7. Fill in all 8 fields (or tap **Fill example**) and press **Predict**. Example input: Cassava, Eastern Province, Refugee camp, 44.8 km, year 2025, month 9, last month's price 362.5, national median 350. The app shows a price tag with about 389.5 RWF per kg for next month, a change of +7.4% and a RISING label.
 
 If the API is deployed under a different Render service name, update `apiUrl` at the top of `lib/main.dart`.
 
@@ -102,7 +102,7 @@ uv export --format requirements.txt --no-hashes --no-dev -o API/requirements.txt
 ## Deployment on Render
 
 Create a new Web Service connected to this repository with these settings:
-- **Name:** `rwanda-food-price-predictor`
+- **Name:** `liner-regression-model-project` (Render uses the name for the URL)
 - **Root Directory:** `summative/API`
 - **Runtime:** Python 3 (version in `summative/API/.python-version`; set the `PYTHON_VERSION` environment variable to a 3.13 release if needed)
 - **Build Command:** `pip install -r requirements.txt`

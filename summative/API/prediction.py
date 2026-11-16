@@ -133,7 +133,7 @@ app = FastAPI(
 # Note: CORS is enforced by browsers only. The Flutter mobile app is not a browser, so it is not affected.
 # ---------------------------------------------------------------------------
 DEFAULT_ORIGINS = [
-    "https://rwanda-food-price-predictor.onrender.com",
+    "https://liner-regression-model-project.onrender.com",
     "http://localhost:5000",
     "http://127.0.0.1:5000",
 ]
