@@ -9,16 +9,19 @@ const String apiUrl = 'https://liner-regression-model-project.onrender.com/predi
 // Free Render services sleep when idle and can take about a minute to wake up.
 const Duration requestTimeout = Duration(seconds: 70);
 
-/// Earthy colours borrowed from imigongo, the geometric art of eastern Rwanda.
+/// Green for the main actions, orange for accents.
 abstract final class Palette {
-  static const ink = Color(0xFF2B2622);
-  static const cream = Color(0xFFF6F1E7);
-  static const paper = Color(0xFFFFFCF6);
-  static const line = Color(0xFFE3D9C8);
-  static const muted = Color(0xFF7A7064);
-  static const clay = Color(0xFFB4532A);
-  static const leaf = Color(0xFF2F5D46);
-  static const river = Color(0xFF2E6A8E);
+  static const ink = Color(0xFF1F2A24);
+  static const cream = Color(0xFFF3F7F2);
+  static const paper = Color(0xFFFFFFFF);
+  static const line = Color(0xFFDCE6DD);
+  static const muted = Color(0xFF66756B);
+  static const green = Color(0xFF1E7A46);
+  static const greenLight = Color(0xFF34A065);
+  static const orange = Color(0xFFF28C28);
+  static const rising = Color(0xFFD9480F);
+  static const stable = Color(0xFF1E7A46);
+  static const falling = Color(0xFF1C6FB0);
 }
 
 void main() => runApp(const FoodPriceApp());
@@ -38,7 +41,7 @@ class FoodPriceApp extends StatelessWidget {
       scrollBehavior: const NoStretchScrollBehavior(),
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Palette.leaf, surface: Palette.cream),
+        colorScheme: ColorScheme.fromSeed(seedColor: Palette.green, surface: Palette.cream),
         scaffoldBackgroundColor: Palette.cream,
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
@@ -47,10 +50,10 @@ class FoodPriceApp extends StatelessWidget {
           helperMaxLines: 2,
           helperStyle: const TextStyle(color: Palette.muted),
           prefixIconColor: Palette.muted,
-          floatingLabelStyle: const TextStyle(color: Palette.clay, fontWeight: FontWeight.w600),
+          floatingLabelStyle: const TextStyle(color: Palette.orange, fontWeight: FontWeight.w600),
           border: border,
           enabledBorder: border,
-          focusedBorder: border.copyWith(borderSide: const BorderSide(color: Palette.clay, width: 1.6)),
+          focusedBorder: border.copyWith(borderSide: const BorderSide(color: Palette.orange, width: 1.6)),
         ),
       ),
       home: const PredictionPage(),
@@ -175,7 +178,7 @@ class PricePrediction {
   final String alert;
   final String message;
 
-  Color get color => switch (alert) { 'Rising' => Palette.clay, 'Falling' => Palette.river, _ => Palette.leaf };
+  Color get color => switch (alert) { 'Rising' => Palette.rising, 'Falling' => Palette.falling, _ => Palette.stable };
 
   String get changeText => '${changePct > 0 ? '+' : ''}${changePct.toStringAsFixed(1)}%';
 }
@@ -241,6 +244,13 @@ class _PredictionPageState extends State<PredictionPage> {
   double _lastMonthPrice = 0;
 
   @override
+  void initState() {
+    super.initState();
+    // Wake the sleeping Render server while the user is still filling in the form.
+    http.get(Uri.parse(apiUrl).replace(path: '/docs')).timeout(requestTimeout).then((_) {}, onError: (_) {});
+  }
+
+  @override
   void dispose() {
     for (final controller in _controllers.values) {
       controller.dispose();
@@ -302,7 +312,7 @@ class _PredictionPageState extends State<PredictionPage> {
       appBar: AppBar(
         title: const Text('Rwanda Food Price Predictor', style: TextStyle(fontWeight: FontWeight.w600)),
         centerTitle: true,
-        backgroundColor: Palette.leaf,
+        backgroundColor: Palette.green,
         foregroundColor: Palette.cream,
         actions: [
           IconButton(tooltip: 'Clear all fields', icon: const Icon(Icons.refresh), onPressed: _loading ? null : _reset),
@@ -352,9 +362,8 @@ class IntroCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Palette.leaf, Color(0xFF467A5E)]),
+        gradient: const LinearGradient(colors: [Palette.green, Palette.greenLight]),
         borderRadius: BorderRadius.circular(10),
-        border: const Border(bottom: BorderSide(color: Palette.clay, width: 4)),
       ),
       child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -407,17 +416,37 @@ class SectionBlock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text.rich(
-            TextSpan(children: [
-              TextSpan(
-                text: '${number.toString().padLeft(2, '0')}  ',
-                style: const TextStyle(color: Palette.clay, fontWeight: FontWeight.w800),
+          Row(
+            children: [
+              // Numbered square with an orange top edge.
+              Container(
+                width: 34,
+                height: 34,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Palette.greenLight, Palette.green],
+                  ),
+                  borderRadius: BorderRadius.circular(7),
+                  border: const Border(top: BorderSide(color: Palette.orange, width: 2)),
+                ),
+                child: Text('$number', style: const TextStyle(color: Palette.cream, fontWeight: FontWeight.w800)),
               ),
-              TextSpan(text: section.title),
-            ]),
-            style: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w700, color: Palette.ink),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(section.title,
+                        style: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w700, color: Palette.ink)),
+                    Text(section.subtitle, style: const TextStyle(color: Palette.muted, fontSize: 13)),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text(section.subtitle, style: const TextStyle(color: Palette.muted, fontSize: 13)),
           const SizedBox(height: 16),
           for (final field in section.fields) FieldTile(field: field, controller: controllers[field.key]!),
         ],
@@ -484,7 +513,7 @@ class ChoicePicker extends StatelessWidget {
           onTap: () => onPick(option),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 180),
-            padding: EdgeInsets.symmetric(horizontal: 14, vertical: asSwitch ? 10 : 8),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: asSwitch ? 10 : 9),
             decoration: BoxDecoration(
               color: option.toLowerCase() == selected ? Palette.ink : (asSwitch ? Colors.transparent : Palette.paper),
               borderRadius: BorderRadius.circular(asSwitch ? 8 : 20),
@@ -505,7 +534,19 @@ class ChoicePicker extends StatelessWidget {
         ),
     ];
 
-    if (!asSwitch) return Wrap(spacing: 8, runSpacing: 8, children: choices);
+    if (!asSwitch) {
+      // Equal-width cells so the options line up in columns: 2 on a phone, up to 4 on wider screens.
+      return LayoutBuilder(builder: (context, constraints) {
+        const gap = 8.0;
+        final columns = (constraints.maxWidth / 150).floor().clamp(2, 4);
+        final cellWidth = (constraints.maxWidth - gap * (columns - 1)) / columns;
+        return Wrap(
+          spacing: gap,
+          runSpacing: gap,
+          children: [for (final choice in choices) SizedBox(width: cellWidth, child: choice)],
+        );
+      });
+    }
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
@@ -551,7 +592,7 @@ class ActionRow extends StatelessWidget {
             flex: 3,
             child: FilledButton(
               onPressed: loading ? null : onPredict,
-              style: FilledButton.styleFrom(backgroundColor: Palette.leaf, shape: shape),
+              style: FilledButton.styleFrom(backgroundColor: Palette.green, shape: shape),
               child: loading
                   ? const SizedBox.square(
                       dimension: 22,
@@ -589,7 +630,7 @@ class PriceTag extends StatelessWidget {
       decoration: BoxDecoration(
         color: Palette.paper,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Palette.ink, width: 1.2),
+        border: Border.all(color: Palette.green, width: 1.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -663,9 +704,9 @@ class ErrorNote extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFFBEDE6),
+        color: const Color(0xFFFFF1E6),
         borderRadius: BorderRadius.circular(8),
-        border: const Border(left: BorderSide(color: Palette.clay, width: 4)),
+        border: const Border(left: BorderSide(color: Palette.orange, width: 4)),
       ),
       child: Text(message, style: const TextStyle(color: Palette.ink, fontSize: 15, height: 1.4)),
     );
