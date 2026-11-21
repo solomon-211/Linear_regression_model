@@ -1,0 +1,172 @@
+commodity,province,market_type,distance_to_kigali_km,year,month,price_last_month,national_median_last_month,price
+Cassava,Eastern Province,Town market,44.3,2026,7,400.0,400.0,400.0
+Cassava flour,Eastern Province,Town market,44.3,2026,7,800.0,721.4300000000001,800.0
+Potatoes,Eastern Province,Town market,44.3,2026,7,400.0,400.0,400.0
+Potatoes (Irish),Eastern Province,Town market,44.3,2026,7,500.0,550.0,600.0
+Sorghum,Eastern Province,Town market,44.3,2026,7,800.0,842.86,700.0
+Fish (dry),Eastern Province,Town market,44.3,2026,7,3500.0,3800.0,5000.0
+Meat (beef),Eastern Province,Town market,44.3,2026,7,7000.0,7000.0,6500.0
+Sugar,Eastern Province,Town market,44.3,2026,7,1600.0,1600.0,1800.0
+Bananas,Eastern Province,Town market,44.3,2026,7,450.0,450.0,400.0
+Cabbage,Eastern Province,Town market,44.3,2026,7,300.0,300.0,250.0
+Cassava leaves,Eastern Province,Town market,44.3,2026,7,700.0,500.0,700.0
+Cassava,Eastern Province,Town market,46.0,2026,7,400.0,400.0,300.0
+Cassava flour,Eastern Province,Town market,46.0,2026,7,800.0,721.4300000000001,800.0
+Potatoes,Eastern Province,Town market,46.0,2026,7,400.0,400.0,300.0
+Potatoes (Irish),Eastern Province,Town market,46.0,2026,7,550.0,550.0,550.0
+Sorghum,Eastern Province,Town market,46.0,2026,7,700.0,842.86,600.0
+Fish (dry),Eastern Province,Town market,46.0,2026,7,3850.0,3800.0,4000.0
+Sugar,Eastern Province,Town market,46.0,2026,7,1700.0,1600.0,1800.0
+Bananas,Eastern Province,Town market,46.0,2026,7,375.0,450.0,300.0
+Cabbage,Eastern Province,Town market,46.0,2026,7,250.0,300.0,300.0
+Cassava leaves,Eastern Province,Town market,46.0,2026,7,650.0,500.0,600.0
+Cassava,Eastern Province,Refugee camp,44.8,2026,7,433.33,400.0,440.0
+Cassava flour,Eastern Province,Refugee camp,44.8,2026,7,933.33,721.4300000000001,1000.0
+Potatoes,Eastern Province,Refugee camp,44.8,2026,7,391.67,400.0,410.0
+Potatoes (Irish),Eastern Province,Refugee camp,44.8,2026,7,525.0,550.0,620.0
+Sorghum,Eastern Province,Refugee camp,44.8,2026,7,833.33,842.86,800.0
+Fish (dry),Eastern Province,Refugee camp,44.8,2026,7,4400.0,3800.0,4700.0
+Meat (beef),Eastern Province,Refugee camp,44.8,2026,7,7000.0,7000.0,7500.0
+Sugar,Eastern Province,Refugee camp,44.8,2026,7,1900.0,1600.0,1880.0
+Bananas,Eastern Province,Refugee camp,44.8,2026,7,458.33,450.0,420.0
+Cabbage,Eastern Province,Refugee camp,44.8,2026,7,283.33,300.0,340.0
+Cassava leaves,Eastern Province,Refugee camp,44.8,2026,7,666.67,500.0,700.0
+Cassava,Eastern Province,Town market,69.4,2026,7,500.0,400.0,500.0
+Cassava flour,Eastern Province,Town market,69.4,2026,7,700.0,721.4300000000001,1000.0
+Maize flour (imported),Eastern Province,Town market,69.4,2026,7,1200.0,1200.0,1200.0
+Potatoes,Eastern Province,Town market,69.4,2026,7,500.0,400.0,500.0
+Potatoes (Irish),Eastern Province,Town market,69.4,2026,7,500.0,550.0,700.0
+Sorghum,Eastern Province,Town market,69.4,2026,7,800.0,842.86,800.0
+Fish (dry),Eastern Province,Town market,69.4,2026,7,3800.0,3800.0,5000.0
+Sugar,Eastern Province,Town market,69.4,2026,7,1600.0,1600.0,1600.0
+Bananas,Eastern Province,Town market,69.4,2026,7,350.0,450.0,300.0
+Cabbage,Eastern Province,Town market,69.4,2026,7,350.0,300.0,300.0
+Cassava,Eastern Province,Town market,94.5,2026,7,500.0,400.0,1000.0
+Cassava flour,Eastern Province,Town market,94.5,2026,7,766.67,721.4300000000001,800.0
+Maize flour (imported),Eastern Province,Town market,94.5,2026,7,1200.0,1200.0,1200.0
+Potatoes,Eastern Province,Town market,94.5,2026,7,500.0,400.0,500.0
+Potatoes (Irish),Eastern Province,Town market,94.5,2026,7,533.33,550.0,700.0
+Sorghum,Eastern Province,Town market,94.5,2026,7,933.33,842.86,800.0
+Fish (dry),Eastern Province,Town market,94.5,2026,7,3800.0,3800.0,4500.0
+Sugar,Eastern Province,Town market,94.5,2026,7,1680.0,1600.0,1700.0
+Bananas,Eastern Province,Town market,94.5,2026,7,316.67,450.0,300.0
+Cabbage,Eastern Province,Town market,94.5,2026,7,250.0,300.0,400.0
+Cassava,Eastern Province,Refugee camp,95.5,2026,7,500.0,400.0,750.0
+Cassava flour,Eastern Province,Refugee camp,95.5,2026,7,742.86,721.4300000000001,725.0
+Maize flour (imported),Eastern Province,Refugee camp,95.5,2026,7,1142.86,1200.0,1200.0
+Potatoes,Eastern Province,Refugee camp,95.5,2026,7,500.0,400.0,500.0
+Potatoes (Irish),Eastern Province,Refugee camp,95.5,2026,7,442.86,550.0,725.0
+Sorghum,Eastern Province,Refugee camp,95.5,2026,7,842.86,842.86,800.0
+Fish (dry),Eastern Province,Refugee camp,95.5,2026,7,3828.57,3800.0,4750.0
+Sugar,Eastern Province,Refugee camp,95.5,2026,7,1600.0,1600.0,1620.0
+Bananas,Eastern Province,Refugee camp,95.5,2026,7,371.43,450.0,325.0
+Cabbage,Eastern Province,Refugee camp,95.5,2026,7,278.57,300.0,325.0
+Cassava leaves,Eastern Province,Refugee camp,95.5,2026,7,300.0,500.0,450.0
+Cassava flour,Southern Province,Town market,83.8,2026,7,566.67,721.4300000000001,600.0
+Potatoes (Irish),Southern Province,Town market,83.8,2026,7,550.0,550.0,550.0
+Sorghum,Southern Province,Town market,83.8,2026,7,800.0,842.86,700.0
+Fish (dry),Southern Province,Town market,83.8,2026,7,3475.0,3800.0,2500.0
+Sugar,Southern Province,Town market,83.8,2026,7,1566.67,1600.0,1450.0
+Cassava flour,Southern Province,Town market,84.5,2026,7,650.0,721.4300000000001,650.0
+Maize flour (imported),Southern Province,Town market,84.5,2026,7,1200.0,1200.0,1200.0
+Potatoes,Southern Province,Town market,84.5,2026,7,350.0,400.0,300.0
+Potatoes (Irish),Southern Province,Town market,84.5,2026,7,550.0,550.0,566.67
+Sorghum,Southern Province,Town market,84.5,2026,7,775.0,842.86,850.0
+Fish (dry),Southern Province,Town market,84.5,2026,7,3500.0,3800.0,3700.0
+Sugar,Southern Province,Town market,84.5,2026,7,1400.0,1600.0,1400.0
+Bananas,Southern Province,Town market,84.5,2026,7,400.0,450.0,400.0
+Cabbage,Southern Province,Town market,84.5,2026,7,250.0,300.0,250.0
+Cassava leaves,Southern Province,Town market,84.5,2026,7,300.0,500.0,300.0
+Cassava,Southern Province,Refugee camp,83.4,2026,7,350.0,400.0,400.0
+Cassava flour,Southern Province,Refugee camp,83.4,2026,7,633.33,721.4300000000001,680.0
+Potatoes,Southern Province,Refugee camp,83.4,2026,7,325.0,400.0,360.0
+Potatoes (Irish),Southern Province,Refugee camp,83.4,2026,7,566.67,550.0,580.0
+Sorghum,Southern Province,Refugee camp,83.4,2026,7,1200.0,842.86,1120.0
+Sugar,Southern Province,Refugee camp,83.4,2026,7,1775.0,1600.0,1780.0
+Bananas,Southern Province,Refugee camp,83.4,2026,7,483.33,450.0,490.0
+Cabbage,Southern Province,Refugee camp,83.4,2026,7,275.0,300.0,260.0
+Cassava leaves,Southern Province,Refugee camp,83.4,2026,7,300.0,500.0,300.0
+Cassava,Southern Province,Town market,89.6,2026,7,400.0,400.0,400.0
+Cassava flour,Southern Province,Town market,89.6,2026,7,1050.0,721.4300000000001,1000.0
+Maize flour (imported),Southern Province,Town market,89.6,2026,7,1200.0,1200.0,1200.0
+Potatoes,Southern Province,Town market,89.6,2026,7,300.0,400.0,250.0
+Potatoes (Irish),Southern Province,Town market,89.6,2026,7,500.0,550.0,500.0
+Sorghum,Southern Province,Town market,89.6,2026,7,850.0,842.86,750.0
+Fish (dry),Southern Province,Town market,89.6,2026,7,3550.0,3800.0,7000.0
+Meat (beef),Southern Province,Town market,89.6,2026,7,7000.0,7000.0,8000.0
+Sugar,Southern Province,Town market,89.6,2026,7,1500.0,1600.0,1550.0
+Bananas,Southern Province,Town market,89.6,2026,7,475.0,450.0,400.0
+Cabbage,Southern Province,Town market,89.6,2026,7,250.0,300.0,200.0
+Cassava leaves,Southern Province,Town market,89.6,2026,7,400.0,500.0,500.0
+Cassava,Southern Province,Town market,78.7,2026,7,400.0,400.0,400.0
+Cassava flour,Southern Province,Town market,78.7,2026,7,800.0,721.4300000000001,800.0
+Maize flour (imported),Southern Province,Town market,78.7,2026,7,1200.0,1200.0,1200.0
+Potatoes,Southern Province,Town market,78.7,2026,7,400.0,400.0,400.0
+Potatoes (Irish),Southern Province,Town market,78.7,2026,7,550.0,550.0,580.0
+Sorghum,Southern Province,Town market,78.7,2026,7,1000.0,842.86,900.0
+Fish (dry),Southern Province,Town market,78.7,2026,7,5000.0,3800.0,4000.0
+Sugar,Southern Province,Town market,78.7,2026,7,1500.0,1600.0,1500.0
+Bananas,Southern Province,Town market,78.7,2026,7,500.0,450.0,300.0
+Cabbage,Southern Province,Town market,78.7,2026,7,300.0,300.0,300.0
+Cassava leaves,Southern Province,Town market,78.7,2026,7,400.0,500.0,300.0
+Cassava,Southern Province,Town market,84.9,2026,7,400.0,400.0,275.0
+Cassava flour,Southern Province,Town market,84.9,2026,7,600.0,721.4300000000001,800.0
+Maize flour (imported),Southern Province,Town market,84.9,2026,7,1200.0,1200.0,1233.33
+Potatoes,Southern Province,Town market,84.9,2026,7,250.0,400.0,200.0
+Potatoes (Irish),Southern Province,Town market,84.9,2026,7,700.0,550.0,525.0
+Sorghum,Southern Province,Town market,84.9,2026,7,900.0,842.86,875.0
+Fish (dry),Southern Province,Town market,84.9,2026,7,3750.0,3800.0,4500.0
+Sugar,Southern Province,Town market,84.9,2026,7,1450.0,1600.0,1466.67
+Bananas,Southern Province,Town market,84.9,2026,7,500.0,450.0,425.0
+Cassava leaves,Southern Province,Town market,84.9,2026,7,400.0,500.0,450.0
+Cassava flour,Southern Province,Refugee camp,84.1,2026,7,700.0,721.4300000000001,600.0
+Potatoes,Southern Province,Refugee camp,84.1,2026,7,250.0,400.0,250.0
+Potatoes (Irish),Southern Province,Refugee camp,84.1,2026,7,671.43,550.0,587.5
+Sorghum,Southern Province,Refugee camp,84.1,2026,7,950.0,842.86,875.0
+Sugar,Southern Province,Refugee camp,84.1,2026,7,1700.0,1600.0,1690.91
+Bananas,Southern Province,Refugee camp,84.1,2026,7,500.0,450.0,425.0
+Cabbage,Southern Province,Refugee camp,84.1,2026,7,350.0,300.0,462.5
+Cassava,Western Province,Town market,80.0,2026,7,400.0,400.0,500.0
+Cassava flour,Western Province,Town market,80.0,2026,7,1000.0,721.4300000000001,850.0
+Maize flour (imported),Western Province,Town market,80.0,2026,7,1100.0,1200.0,1160.0
+Potatoes,Western Province,Town market,80.0,2026,7,400.0,400.0,350.0
+Potatoes (Irish),Western Province,Town market,80.0,2026,7,800.0,550.0,750.0
+Sorghum,Western Province,Town market,80.0,2026,7,1000.0,842.86,1150.0
+Fish (dry),Western Province,Town market,80.0,2026,7,4000.0,3800.0,4250.0
+Meat (beef),Western Province,Town market,80.0,2026,7,6500.0,7000.0,8000.0
+Sugar,Western Province,Town market,80.0,2026,7,1600.0,1600.0,1900.0
+Bananas,Western Province,Town market,80.0,2026,7,450.0,450.0,450.0
+Cabbage,Western Province,Town market,80.0,2026,7,500.0,300.0,500.0
+Cassava leaves,Western Province,Town market,80.0,2026,7,800.0,500.0,750.0
+Cassava,Western Province,Town market,78.0,2026,7,500.0,400.0,500.0
+Cassava flour,Western Province,Town market,78.0,2026,7,700.0,721.4300000000001,700.0
+Maize flour (imported),Western Province,Town market,78.0,2026,7,1200.0,1200.0,1200.0
+Potatoes,Western Province,Town market,78.0,2026,7,200.0,400.0,400.0
+Potatoes (Irish),Western Province,Town market,78.0,2026,7,750.0,550.0,700.0
+Sorghum,Western Province,Town market,78.0,2026,7,850.0,842.86,1000.0
+Fish (dry),Western Province,Town market,78.0,2026,7,4000.0,3800.0,4500.0
+Sugar,Western Province,Town market,78.0,2026,7,1800.0,1600.0,1800.0
+Bananas,Western Province,Town market,78.0,2026,7,350.0,450.0,400.0
+Cabbage,Western Province,Town market,78.0,2026,7,400.0,300.0,400.0
+Cassava,Western Province,Refugee camp,80.3,2026,7,487.5,400.0,580.0
+Cassava flour,Western Province,Refugee camp,80.3,2026,7,800.0,721.4300000000001,750.0
+Maize flour (imported),Western Province,Refugee camp,80.3,2026,7,1180.0,1200.0,1200.0
+Potatoes,Western Province,Refugee camp,80.3,2026,7,412.5,400.0,380.0
+Potatoes (Irish),Western Province,Refugee camp,80.3,2026,7,787.5,550.0,720.0
+Sorghum,Western Province,Refugee camp,80.3,2026,7,966.67,842.86,1000.0
+Fish (dry),Western Province,Refugee camp,80.3,2026,7,4000.0,3800.0,4300.0
+Meat (beef),Western Province,Refugee camp,80.3,2026,7,7000.0,7000.0,7600.0
+Sugar,Western Province,Refugee camp,80.3,2026,7,1687.5,1600.0,1800.0
+Bananas,Western Province,Refugee camp,80.3,2026,7,450.0,450.0,400.0
+Cabbage,Western Province,Refugee camp,80.3,2026,7,525.0,300.0,480.0
+Cassava leaves,Western Province,Refugee camp,80.3,2026,7,900.0,500.0,1000.0
+Cassava,Western Province,Town market,86.0,2026,7,400.0,400.0,400.0
+Cassava flour,Western Province,Town market,86.0,2026,7,700.0,721.4300000000001,700.0
+Potatoes,Western Province,Town market,86.0,2026,7,400.0,400.0,400.0
+Potatoes (Irish),Western Province,Town market,86.0,2026,7,700.0,550.0,700.0
+Fish (dry),Western Province,Town market,86.0,2026,7,3600.0,3800.0,3600.0
+Meat (beef),Western Province,Town market,86.0,2026,7,7000.0,7000.0,8000.0
+Sugar,Western Province,Town market,86.0,2026,7,1500.0,1600.0,1500.0
+Bananas,Western Province,Town market,86.0,2026,7,400.0,450.0,350.0
+Cabbage,Western Province,Town market,86.0,2026,7,300.0,300.0,300.0
+Cassava leaves,Western Province,Town market,86.0,2026,7,500.0,500.0,800.0
