@@ -21,7 +21,7 @@ so that WFP cash-transfer officers can check whether the planned transfer still 
 
 ## Video Demonstration
 
-**YouTube:** https://youtu.be/REPLACE_WITH_YOUR_VIDEO_ID
+**YouTube:** https://youtu.be/VTiJ89U9CxY
 
 ## Running the Mobile Application
 
@@ -63,7 +63,9 @@ linear_regression_model/
     │   └── wfp_food_prices_rwa.csv      # WFP dataset as downloaded from HDX
     ├── API/
     │   ├── prediction.py                # FastAPI service: /predict, /retrain, /docs
-    │   ├── requirements.txt             # exported with uv
+    │   ├── retrain.py                   # retraining logic used by /retrain (partial_fit for SGDRegressor)
+    │   ├── pyproject.toml, uv.lock      # uv project for the API only
+    │   ├── requirements.txt             # exported with uv, used by Render
     │   ├── best_model.pkl               # preprocessing and SGDRegressor Pipeline
     │   └── training_data.csv            # training rows used by /retrain
     └── FlutterApp/                      # one-page Flutter application
@@ -95,8 +97,9 @@ cd API && uv run uvicorn prediction:app --reload   # then open http://127.0.0.1:
 
 To regenerate the API requirements after changing dependencies:
 ```bash
-cd summative
-uv export --format requirements.txt --no-hashes --no-dev -o API/requirements.txt
+cd summative/API
+uv lock
+uv export --format requirements.txt --no-hashes --no-dev -o requirements.txt
 ```
 
 ## Deployment on Render
