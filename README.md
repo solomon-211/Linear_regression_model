@@ -13,7 +13,7 @@ so that WFP cash-transfer officers can check whether the planned transfer still 
 
 ## API (Swagger UI)
 
-**https://liner-regression-model-project.onrender.com/docs**
+**https://linear-regression-model-3xle.onrender.com/docs**
 
 - `POST /predict`: accepts the 8 input variables and returns the predicted price (RWF per kg), the change from last month and a price alert (Rising, Stable or Falling).
 - `POST /retrain`: accepts a CSV file of new prices, updates the model and applies it immediately.
@@ -105,7 +105,7 @@ uv export --format requirements.txt --no-hashes --no-dev -o requirements.txt
 ## Deployment on Render
 
 Create a new Web Service connected to this repository with these settings:
-- **Name:** `liner-regression-model-project` (Render uses the name for the URL)
+- **Name:** `Linear_regression_model` (Render built the URL from it: `linear-regression-model-3xle.onrender.com`)
 - **Root Directory:** `summative/API`
 - **Runtime:** Python 3 (version in `summative/API/.python-version`; set the `PYTHON_VERSION` environment variable to a 3.13 release if needed)
 - **Build Command:** `pip install -r requirements.txt`

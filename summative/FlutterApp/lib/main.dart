@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-const String apiUrl = 'https://liner-regression-model-project.onrender.com/predict';
+const String apiUrl = 'https://linear-regression-model-3xle.onrender.com/predict';
 
 // Free Render services sleep when idle and can take about a minute to wake up.
 const Duration requestTimeout = Duration(seconds: 70);
