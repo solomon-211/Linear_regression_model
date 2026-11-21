@@ -29,8 +29,8 @@ so that WFP cash-transfer officers can check whether the planned transfer still 
 2. Start an Android emulator (Android Studio → Device Manager → ▶) or connect a physical device with USB debugging turned on.
 3. Clone the repository and open the app folder:
    ```bash
-   git clone https://github.com/solomon-211/Liner_regression_model_project.git
-   cd Liner_regression_model_project/summative/FlutterApp
+   git clone https://github.com/solomon-211/linear_regression_model.git
+   cd linear_regression_model/summative/FlutterApp
    ```
 4. The Android platform folder is included. To also run on iOS (macOS only), generate the iOS folder first (the existing `lib/` and `pubspec.yaml` files are kept):
    ```bash
